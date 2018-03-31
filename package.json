@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "koa": "^2.5.0"
+    "ioredis": "^3.2.2",
+    "koa": "^2.5.0",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.0.12",
+    "showapi-sdk": "^1.0.4"
   }
 }
