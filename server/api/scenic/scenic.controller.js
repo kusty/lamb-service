@@ -18,14 +18,19 @@ exports.getScenicList = async (ctx, next) => {
   //   condition = _.defaults(condition, { tags: { $elemMatch: { $eq: tagId } } })
   // }
   try {
-    const list = await Scenic.find({})
+    const list = await Scenic.find({
+      location: {
+        $near: [121.48, 31.22],  //前面是纬度 后面是精度
+        $maxDistance: 10    //10公里之内的数据
+      }
+    })
       .select('name img_list')
       .skip(startRow)
       .limit(pageSize)
       // .sort(sort)
       .exec()
     const pagination = {
-      currentPage: currentPage,
+      currentPage: page,
       pageSize: pageSize,
       total: await Scenic.count()
     }

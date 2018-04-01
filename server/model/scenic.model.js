@@ -2,7 +2,7 @@
  * @Author: wayne 
  * @Date: 2018-03-30 17:03:57 
  * @Last Modified by: wayne
- * @Last Modified time: 2018-03-31 01:42:38
+ * @Last Modified time: 2018-04-01 09:29:57
  */
 
 'use strict'
@@ -23,7 +23,8 @@ let ScenicSchema = new Schema({
     type: String
   },
   location: {
-    type: Array
+    type: [Number],
+    index: "2d"
   },
   city_id: {
     type: Number
