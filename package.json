@@ -1,9 +1,13 @@
 {
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "http": "^0.0.0",
     "ioredis": "^3.2.2",
     "koa": "^2.5.0",
     "koa-router": "^7.4.0",
     "mongoose": "^5.0.12",
-    "showapi-sdk": "^1.0.4"
+    "request": "^2.85.0",
+    "showapi-sdk": "^1.0.4",
+    "superagent": "^3.8.2"
   }
 }
