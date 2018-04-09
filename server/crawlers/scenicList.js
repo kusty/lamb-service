@@ -5,7 +5,7 @@ var cheerio = require('cheerio')
 var request = require('request');
 
 var url = 'http://www.mafengwo.cn/ajax/router.php';
-var page = 1;
+var page = 1065;
 var getList = function () {
 
   var options = {
@@ -21,6 +21,7 @@ var getList = function () {
   };
 
   request(options, function (error, response, body) {
+    console.log(page)
     if (error) throw new Error(error);
     var data = JSON.parse(body).data.list;
     var $ = cheerio.load(data, { decodeEntities: false });
@@ -50,8 +51,6 @@ var getList = function () {
       console.log(JSON.parse(body).error)
     }
   });
-
-
 }
 
 getList()
