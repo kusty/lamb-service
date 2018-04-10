@@ -2,7 +2,7 @@
  * @Author: wayne 
  * @Date: 2018-04-09 13:36:17 
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-09 17:41:14
+ * @Last Modified time: 2018-04-10 16:17:55
  */
 'use strict';
 
@@ -28,7 +28,7 @@ const fetchList = async () => {
     })
   return dataArrary
 }
-var i = 0;
+var i = 8141;
 const fetchDetail = (url, arr) => {
   const options = {
     method: 'GET',
@@ -76,13 +76,14 @@ const fetchDetail = (url, arr) => {
     console.log(obj);
     ScenicDetail.create(obj);
 
-    const randomTime = parseInt(Math.random() * 10);
+    const randomTime = parseInt(Math.random() * 10) * 1000;
     console.log(randomTime)
+    console.log(i)
     if (url) {
       setTimeout(function () {
         i = i + 1;
         fetchDetail(arr[i].href, arr)
-      }, randomTime * 1000)
+      }, randomTime)
     }
   });
 }
