@@ -1,29 +1,28 @@
 /*
- * @Author: wayne 
- * @Date: 2018-04-01 13:01:33 
+ * @Author: wayne
+ * @Date: 2018-04-01 13:01:33
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-08 22:17:44
+ * @Last Modified time: 2018-04-13 10:22:00
  */
 
-'use strict'
 
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
 
-let ScenicListSchema = new Schema({
+const { Schema } = mongoose;
+
+const ScenicListSchema = new Schema({
   name: {
-    type: String
+    type: String,
   },
   href: {
-    type: String
+    type: String,
   },
   img: {
-    type: String
+    type: String,
   },
 
-})
+});
 
 
-
-exports.ScenicListSchema = ScenicListSchema
-module.exports = mongoose.model('ScenicList', ScenicListSchema)
+exports.ScenicListSchema = ScenicListSchema;
+module.exports = mongoose.model('ScenicList', ScenicListSchema);

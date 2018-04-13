@@ -1,50 +1,49 @@
 /*
- * @Author: wayne 
- * @Date: 2018-04-01 13:01:33 
+ * @Author: wayne
+ * @Date: 2018-04-01 13:01:33
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-09 16:57:08
+ * @Last Modified time: 2018-04-13 10:22:14
  */
 
-'use strict'
 
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
 
-let ScenicDetailSchema = new Schema({
+const { Schema } = mongoose;
+
+const ScenicDetailSchema = new Schema({
   poi_id: {
-    type: Number
+    type: Number,
   },
   name: {
-    type: String
+    type: String,
   },
   address: {
-    type: String
+    type: String,
   },
   tel: {
-    type: String
+    type: String,
   },
   location: {
     type: [Number],
-    index: "2d"
+    index: '2d',
   },
   price: {
-    type: String
+    type: String,
   },
   open_time: {
-    type: String
+    type: String,
   },
   summary: {
-    type: String
+    type: String,
   },
   suggest_time: {
-    type: String
+    type: String,
   },
   traffic: {
-    type: String
-  }
-})
+    type: String,
+  },
+});
 
 
-
-exports.ScenicDetailSchema = ScenicDetailSchema
-module.exports = mongoose.model('ScenicDetail', ScenicDetailSchema)
+exports.ScenicDetailSchema = ScenicDetailSchema;
+module.exports = mongoose.model('ScenicDetail', ScenicDetailSchema);
