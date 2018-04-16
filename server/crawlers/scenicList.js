@@ -27,15 +27,15 @@ var getList = function () {
     const data = JSON.parse(body).data.list;
     const $ = cheerio.load(data, { decodeEntities: false });
     $('li a').each((idx, element) => {
-      let $element = $(element);
-      let img = $element
+      const $element = $(element);
+      const img = $element
         .children('div')
         .children('img')
         .attr('src')
         .split('?')[0];
-      let href = $element.attr('href');
-      let name = $element.text();
-      let obj = {
+      const href = $element.attr('href');
+      const name = $element.text();
+      const obj = {
         name,
         img,
         href,

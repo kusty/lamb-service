@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-01 13:01:33
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-13 10:22:00
+ * @Last Modified time: 2018-04-14 14:14:14
  */
 
 
@@ -20,7 +20,9 @@ const ScenicListSchema = new Schema({
   img: {
     type: String,
   },
-
+  head_img: {
+    type: String,
+  },
 });
 
 
