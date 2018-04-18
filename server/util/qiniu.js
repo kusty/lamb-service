@@ -1,6 +1,6 @@
 
 
-const config = require('../../config/env');
+const config = require('../config/env');
 const qiniu = require('qiniu');
 
 const mac = new qiniu.auth.digest.Mac(config.qiniu.app_key, config.qiniu.app_secret);
@@ -60,50 +60,50 @@ exports.fetch = (resUrl, key) => {
 
 // 将源空间的指定资源移动到目标空间，或在同一空间内对资源重命名。
 exports.move = (srcKey, destKey, { force = false }) => {
-  let srcBucket,
-    destBucket;
-  srcBucket = destBucket = bucket;
+  const srcBucket = bucket;
+  const destBucket = bucket;
   return new Promise(((resolve, reject) => {
-    bucketManager.move(srcBucket, srcKey, destBucket, destKey, { force }, (err, respBody, respInfo) => {
-      if (err) {
-        reject(err);
-      }
-      if (respInfo.statusCode == 200) {
-        resolve(respBody);
-      } else {
-        reject(new Error(`error status${respInfo.statusCode}`));
-      }
-    });
+    bucketManager.move(srcBucket, srcKey, destBucket, destKey, { force },
+      (err, respBody, respInfo) => {
+        if (err) {
+          reject(err);
+        }
+        if (respInfo.statusCode === 200) {
+          resolve(respBody);
+        } else {
+          reject(new Error(`error status${respInfo.statusCode}`));
+        }
+      });
   }));
 };
 
 // 复制文件
-exports.copy = function (srcKey, destKey, { force = false }) {
-  let srcBucket,
-    destBucket;
-  srcBucket = destBucket = bucket;
+exports.copy = (srcKey, destKey, { force = false }) => {
+  const srcBucket = bucket;
+  const destBucket = bucket;
   return new Promise(((resolve, reject) => {
-    bucketManager.copy(srcBucket, srcKey, destBucket, destKey, { force }, (err, respBody, respInfo) => {
-      if (err) {
-        reject(err);
-      }
-      if (respInfo.statusCode == 200) {
-        resolve(respBody);
-      } else {
-        reject(new Error(`error status${respInfo.statusCode}`));
-      }
-    });
+    bucketManager.copy(srcBucket, srcKey, destBucket, destKey, { force },
+      (err, respBody, respInfo) => {
+        if (err) {
+          reject(err);
+        }
+        if (respInfo.statusCode == 200) {
+          resolve(respBody);
+        } else {
+          reject(new Error(`error status${respInfo.statusCode}`));
+        }
+      });
   }));
 };
 
 // 删除文件
-exports.remove = function (key) {
+exports.remove = (key) => {
   return new Promise(((resolve, reject) => {
     bucketManager.delete(bucket, key, (err, respBody, respInfo) => {
       if (err) {
         reject(err);
       }
-      if (respInfo.statusCode == 200) {
+      if (respInfo.statusCode === 200) {
         resolve(respBody);
       } else {
         reject(new Error(`error status${respInfo.statusCode}`));
@@ -117,7 +117,7 @@ exports.remove = function (key) {
 //                marker    上一次列举返回的位置标记，作为本次列举的起点信息
 //                limit     每次返回的最大列举文件数量
 //                delimiter 指定目录分隔符
-exports.list = function (options) {
+exports.list = (options) => {
   const defaultOptions = {
     limit: 30,
     prefix: 'blog/index',
@@ -133,8 +133,7 @@ exports.list = function (options) {
       if (respInfo.statusCode == 200) {
         // 如果这个nextMarker不为空，那么还有未列举完毕的文件列表，下次调用listPrefix的时候，
         // 指定options里面的marker为这个值
-        const nextMarker = respBody.marker;
-        const commonPrefixes = respBody.commonPrefixes;
+
         respBody.items.forEach((item) => {
           item.url = config.qiniu.domain + item.key;
         });

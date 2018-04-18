@@ -1,17 +1,17 @@
 
 
-const mongoose = require('../connect');
+const mongoose = require('../../connect');
 
 const ScenicList = mongoose.model('ScenicList');
 const cheerio = require('cheerio');
 const request = require('request');
 
 const url = 'http://www.mafengwo.cn/ajax/router.php';
-let page = 1065;
-var getList = function () {
+let page = 0;
+const getList = () => {
   const options = {
     method: 'POST',
-    url: 'http://www.mafengwo.cn/ajax/router.php',
+    url,
     qs:
       {
         sAct: 'KMdd_StructWebAjax|GetPoisByTag',
@@ -22,7 +22,6 @@ var getList = function () {
   };
 
   request(options, (error, response, body) => {
-    console.log(page);
     if (error) throw new Error(error);
     const data = JSON.parse(body).data.list;
     const $ = cheerio.load(data, { decodeEntities: false });
@@ -41,15 +40,12 @@ var getList = function () {
         href,
       };
       ScenicList.create(obj);
-      console.log(obj);
     });
-    const randomTime = parseInt(Math.random() * 10);
-    console.log(randomTime);
-    if (data != '') {
+    const randomTime = parseInt(Math.random() * 10, 10);
+
+    if (data) {
       page += 1;
       setTimeout(getList, randomTime * 1000);
-    } else {
-      console.log(JSON.parse(body).error);
     }
   });
 };

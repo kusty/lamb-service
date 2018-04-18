@@ -2,11 +2,11 @@
  * @Author: wayne
  * @Date: 2018-04-09 13:36:17
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-13 10:16:47
+ * @Last Modified time: 2018-04-17 13:14:31
  */
 
 
-const mongoose = require('../connect');
+const mongoose = require('../../connect');
 
 const ScenicList = mongoose.model('ScenicList');
 const ScenicDetail = mongoose.model('ScenicDetail');
@@ -28,7 +28,7 @@ const fetchList = async () => {
     });
   return dataArrary;
 };
-let i = 32904;
+let i = 0;
 const fetchDetail = (url, arr) => {
   const options = {
     method: 'GET',
@@ -72,12 +72,9 @@ const fetchDetail = (url, arr) => {
       address,
       suggest_time,
     };
-    console.log(obj);
     ScenicDetail.create(obj);
 
-    const randomTime = parseInt(Math.random() * 10) * 1000;
-    console.log(randomTime);
-    console.log(i);
+    const randomTime = parseInt(Math.random() * 10, 10) * 1000;
     if (url) {
       setTimeout(() => {
         i += 1;
@@ -87,7 +84,7 @@ const fetchDetail = (url, arr) => {
   });
 };
 
-const getDetail = async function () {
+const getDetail = async () => {
   const arr = await fetchList();
   fetchDetail(arr[i].href, arr);
 };
