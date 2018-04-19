@@ -2,14 +2,14 @@
  * @Author: wayne
  * @Date: 2018-04-17 14:23:16
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-18 10:01:55
+ * @Last Modified time: 2018-04-19 14:59:56
  */
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const AdministratorSchema = new Schema({
-  userid: {
+const AdminSchema = new Schema({
+  id: {
     type: Number,
   },
   name: {
@@ -23,6 +23,5 @@ const AdministratorSchema = new Schema({
   },
 });
 
-
-exports.AdministratorSchema = AdministratorSchema;
-module.exports = mongoose.model('Administrator', AdministratorSchema);
+exports.AdminSchema = AdminSchema;
+module.exports = mongoose.model('Admin', AdminSchema);

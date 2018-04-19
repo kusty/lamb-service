@@ -1,6 +1,6 @@
 
 const router = require('koa-router')();
-const controller = require('./scenic.controller');
+const controller = require('./poi.controller');
 
 
 router.get('/getScenicList', controller.getScenicList);

@@ -2,14 +2,14 @@
  * @Author: wayne
  * @Date: 2018-04-17 13:16:45
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-17 14:22:13
+ * @Last Modified time: 2018-04-19 15:00:00
  */
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  userid: {
+  id: {
     type: Number,
   },
   name: {
