@@ -15,6 +15,9 @@ const conf = {
       // pass: process.env.MONGO_PASSWORD || ''
     },
   },
+  session: {
+    secrets: 'lamb-secret',
+  },
   // redis 配置
   redis: {
     host: process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1',
