@@ -62,8 +62,9 @@ function hasRole(roleRequired) {
 /**
  * 生成token
  */
-
-
+function signToken(id) {
+  return jwt.sign({ _id: id }, config.session.secrets, { expiresIn: config.session.maxAge / 1000 });
+}
+exports.signToken = signToken;
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
-

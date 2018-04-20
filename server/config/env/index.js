@@ -1,22 +1,16 @@
 
-const path = require('path');
-const _ = require('lodash');
-const fs = require('fs');
 
 const conf = {
   env: process.env.NODE_ENV,
-  root: path.normalize(`${__dirname}/../../..`),
-  port: process.env.PORT || 9000,
-  // mongodb配置
+
   mongo: {
     options: {
       useMongoClient: true,
-      // user: process.env.MONGO_USERNAME || '',
-      // pass: process.env.MONGO_PASSWORD || ''
     },
   },
   session: {
-    secrets: 'lamb-secret',
+    secrets: 'lamb-secrets',
+    maxAge: 720000,
   },
   // redis 配置
   redis: {
@@ -34,9 +28,4 @@ const conf = {
   },
 };
 
-// let config = _.merge(conf, require(`./${process.env.NODE_ENV}.js`) || {});
-// // 加载私有配置
-// if (fs.existsSync(path.join(__dirname, 'private/index.js'))) {
-//   config = _.merge(config, require(path.join(__dirname, 'private/index.js')) || {});
-// }
 module.exports = conf;
