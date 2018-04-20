@@ -18,10 +18,10 @@ const privateConf = {
 
   // 七牛配置
   qiniu: {
-    app_key: process.env.QINIU_APP_KEY || '',
-    app_secret: process.env.QINIU_APP_SECRET || '',
-    domain: process.env.QINIU_APP_DOMAIN || '',
-    bucket: process.env.QINIU_APP_BUCKET || '',
+    app_key: process.env.QINIU_APP_KEY || 'dGEgZkGNoRLsTBsOy_7RSmLEEz4MqcpCdn-qXIXf',
+    app_secret: process.env.QINIU_APP_SECRET || '32yPmhcRBnWC65QhJep8FDGQB7xW1BQFU8wfrv8i',
+    domain: process.env.QINIU_APP_DOMAIN || 'qiniu.zone.Zone_z0',
+    bucket: process.env.QINIU_APP_BUCKET || 'lamb-img',
   },
 };
 
