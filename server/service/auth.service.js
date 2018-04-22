@@ -1,14 +1,13 @@
 
 
 const mongoose = require('../connect');
-const passport = require('koa-passport');
 const config = require('../config/env');
 const koajwt = require('koa-jwt');
 const jwt = require('jsonwebtoken');
 const compose = require('koa-compose');
 
 const User = mongoose.model('User');
-
+const Admin = mongoose.model('Admin');
 /**
  * 验证token
  */
@@ -26,45 +25,48 @@ function authToken() {
 /**
  * 验证用户是否登录
  */
-function isAuthenticated() {
+exports.isAuthenticated = (role = 'user') => {
   return compose([
     authToken(),
     async (ctx, next) => {
-      if (!ctx.state.user) ctx.throw('UnauthorizedError', 401);
+      if (!ctx.state.user) {
+        ctx.body = {
+          status: 410,
+          msg: '无效的token',
+        };
+        return;
+      }
       await next();
     },
     async (ctx, next) => {
-      const user = await User.findById(ctx.state.user._id);
-      if (!user) ctx.throw('UnauthorizedError', 401);
+      let user = '';
+      try {
+        if (role === 'user') {
+          user = await User.findById(ctx.state.user._id);
+        }
+        if (role === 'admin') {
+          user = await Admin.findById(ctx.state.user._id);
+        }
+        if (!user) {
+          ctx.body = {
+            status: 412,
+            msg: '找不到用户信息',
+          };
+        }
+        return;
+      } catch (err) {
+        ctx.throw('UnauthorizedError', 401);
+      }
       ctx.req.user = user;
       await next();
     },
   ]);
-}
+};
 
-/**
- * 验证用户权限
- */
-function hasRole(roleRequired) {
-  if (!roleRequired) this.throw('Required role needs to be set');
-  return compose([
-    isAuthenticated(),
-    async (ctx, next) => {
-      if (config.userRoles.indexOf(ctx.req.user.role) >= config.userRoles.indexOf(roleRequired)) {
-        await next();
-      } else {
-        ctx.throw(403);
-      }
-    },
-  ]);
-}
 
 /**
  * 生成token
  */
-function signToken(id) {
-  return jwt.sign({ _id: id }, config.session.secrets, { expiresIn: config.session.maxAge / 1000 });
-}
-exports.signToken = signToken;
-exports.isAuthenticated = isAuthenticated;
-exports.hasRole = hasRole;
+exports.signToken = (id) => {
+  return jwt.sign({ _id: id }, config.session.secrets, { expiresIn: config.session.maxAge });
+};

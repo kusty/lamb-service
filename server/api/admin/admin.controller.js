@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-18 15:40:49
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-20 17:54:32
+ * @Last Modified time: 2018-04-20 18:17:00
  */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -61,6 +61,13 @@ exports.addAdmin = async (ctx, next) => {
   }
 };
 
+/**
+ *
+ *
+ * @param {any} ctx
+ * @param {any} next
+ * @returns
+ */
 exports.login = async (ctx, next) => {
   const { body } = ctx.request;
   const account = body.account ? body.account.replace(/(^\s+)|(\s+$)/g, '') : '';
