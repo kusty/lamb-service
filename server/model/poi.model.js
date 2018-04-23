@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-14 13:30:34
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-14 13:31:04
+ * @Last Modified time: 2018-04-23 11:03:03
  */
 
 
@@ -15,6 +15,9 @@ const PoiSchema = new Schema({
     type: Number,
   },
   name: {
+    type: String,
+  },
+  head_img: {
     type: String,
   },
   address: {
@@ -42,7 +45,7 @@ const PoiSchema = new Schema({
   traffic: {
     type: String,
   },
-});
+}, { versionKey: false });
 
 
 exports.PoiSchema = PoiSchema;

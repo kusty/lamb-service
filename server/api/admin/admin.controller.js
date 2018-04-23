@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-18 15:40:49
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-20 18:17:00
+ * @Last Modified time: 2018-04-23 16:23:12
  */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -82,12 +82,15 @@ exports.login = async (ctx, next) => {
       };
       return;
     } else if (await bcrypt.compare(password, result.password)) {
-      const token = auth.signToken(result._id);
+      const token = auth.signToken(result.id);
       ctx.body = {
         msg: 'ok',
         status: 200,
         body: {
-          user: result,
+          user: {
+            userid: result.userid,
+            account: result.account,
+          },
           token,
         },
       };

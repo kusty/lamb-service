@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-09 13:36:17
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-17 13:16:17
+ * @Last Modified time: 2018-04-23 11:12:44
  */
 
 
@@ -10,46 +10,34 @@ const mongoose = require('../../connect');
 const qiniu = require('../../util/qiniu');
 
 const ScenicList = mongoose.model('ScenicList');
-
-const update = async () => {
-  const dataArrary = [];
-
-  await ScenicList.find({
-  })
-    .exec()
-    .then((data) => {
-      data.map(async (v) => {
-        const image = v.img || '';
-        const imgArr = image.split('/') || [];
-        const headImg = imgArr[imgArr.length - 1];
-        await ScenicList.findByIdAndUpdate(v.id, { $set: { head_img: headImg } }, { new: true });
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  return dataArrary;
-};
-let arr = [];
+const ScenicDetail = mongoose.model('ScenicDetail');
+const Poi = mongoose.model('Poi');
 const download = async () => {
-  await ScenicList.find({
+  const list = await ScenicDetail.find({
   })
-    .exec()
-    .then((data) => {
-      arr = data.splice(25136, data.length);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    .exec();
+  return list;
 };
-const up = async () => {
-  await download();
-
-  arr.map((v, k) => {
-    return setTimeout(() => {
-      qiniu.fetch(v.img, v.head_img);
-    }, k * 100);
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+const merge = async () => {
+  const list = await download();
+  console.log(Poi);
+  list.map(async (v) => {
+    await (sleep(10));
+    const obj = {
+      tel: v.tel,
+      traffic: v.traffic,
+      open_time: v.open_time,
+      suggest_time: v.suggest_time,
+      price: v.price,
+      address: v.address,
+      summary: v.summary,
+    };
+    const a = await Poi.findOneAndUpdate({ poi_id: v.poi_id }, { $set: obj }, { new: true });
+    console.log(a);
   });
 };
-up();
+merge();
 

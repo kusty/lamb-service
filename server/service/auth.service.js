@@ -52,8 +52,8 @@ exports.isAuthenticated = (role = 'user') => {
             status: 412,
             msg: '找不到用户信息',
           };
+          return;
         }
-        return;
       } catch (err) {
         ctx.throw('UnauthorizedError', 401);
       }
