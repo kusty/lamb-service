@@ -3,7 +3,7 @@
  * @Author: wayne
  * @Date: 2018-04-20 09:31:38
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-23 11:27:25
+ * @Last Modified time: 2018-04-26 09:46:27
  */
 const mongoose = require('mongoose');
 
@@ -15,16 +15,17 @@ exports.getList = async (ctx, next) => {
   const pageSize = parseInt(query.pageSize, 10) > 0 ? parseInt(query.pageSize, 10) : 10;
   const skipRow = (currentPage - 1) * pageSize;
   try {
-    const list = await Poi.find({})
+    const result = await Poi.find({})
       .skip(skipRow)
       .limit(pageSize)
       .exec();
     const total = await Poi.find({}).count();
+    console.log(result);
     ctx.body = {
       status: 200,
       msg: 'ok',
       body: {
-        list,
+        list: result,
         pagination: {
           currentPage,
           pageSize,
