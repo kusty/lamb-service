@@ -10,7 +10,7 @@ const conf = {
   },
   session: {
     secrets: 'lamb-secrets',
-    maxAge: 72000000,
+    maxAge: 720000,
   },
   // redis 配置
   redis: {

@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-14 13:30:34
  * @Last Modified by: wayne
- * @Last Modified time: 2018-05-02 14:45:35
+ * @Last Modified time: 2018-05-03 10:16:50
  */
 
 
@@ -17,7 +17,7 @@ const PoiSchema = new Schema({
   name: {
     type: String,
   },
-  head_img: {
+  profile_pic: {
     type: String,
   },
   address: {
