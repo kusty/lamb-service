@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-20 10:24:47
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-20 10:51:57
+ * @Last Modified time: 2018-05-03 19:36:39
  */
 
 
@@ -16,7 +16,7 @@ const compress = require('koa-compress');
 const bodyParser = require('koa-bodyparser');
 const cors = require('kcors');
 const passport = require('koa-passport');
-const config = require('./config/env');
+const config = require('./config');
 
 module.exports = (app) => {
   if (app.env === 'development') {

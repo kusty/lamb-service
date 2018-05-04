@@ -2,14 +2,13 @@
  * @Author: wayne
  * @Date: 2018-04-18 15:40:49
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-23 16:23:12
+ * @Last Modified time: 2018-05-03 19:36:59
  */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const auth = require('../../service/auth.service');
 
 const Admin = mongoose.model('Admin');
-const config = require('../../config/env');
 
 /**
  *

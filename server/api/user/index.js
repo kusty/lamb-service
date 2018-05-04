@@ -2,12 +2,11 @@
  * @Author: wayne
  * @Date: 2018-05-03 14:13:43
  * @Last Modified by: wayne
- * @Last Modified time: 2018-05-03 14:41:03
+ * @Last Modified time: 2018-05-04 15:54:49
  */
 const router = require('koa-router')();
-const controller = require('./user.controller');
+const userController = require('./user.controller');
+const loginController = require('./login.controller');
 
-// router.put('/addUser', controller.addAdmin);
-// router.post('/login', controller.login);
-router.post('/wxSession', controller.getWxSession);
+router.post('/loginByWx', loginController.loginByWx);
 module.exports = router;

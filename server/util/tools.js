@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-04-08 10:24:22
  * @Last Modified by: wayne
- * @Last Modified time: 2018-04-12 18:43:02
+ * @Last Modified time: 2018-05-03 20:20:34
  */
 // export function GetDistance(lat1, lng1, lat2, lng2) {
 //   const radLat1 = Rad(lat1);

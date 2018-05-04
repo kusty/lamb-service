@@ -1,7 +1,7 @@
 
 
 const mongoose = require('../connect');
-const config = require('../config/env');
+const config = require('../config');
 const koajwt = require('koa-jwt');
 const jwt = require('jsonwebtoken');
 const compose = require('koa-compose');

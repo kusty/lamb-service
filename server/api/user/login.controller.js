@@ -1,8 +1,8 @@
 /*
  * @Author: wayne
- * @Date: 2018-05-03 14:15:06
+ * @Date: 2018-05-04 13:11:06
  * @Last Modified by: wayne
- * @Last Modified time: 2018-05-04 14:55:11
+ * @Last Modified time: 2018-05-04 15:08:23
  */
 const mongoose = require('mongoose');
 const auth = require('../../service/auth.service');
