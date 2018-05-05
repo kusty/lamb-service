@@ -13,4 +13,3 @@ module.exports = (app) => {
   });
   app.use(Router.routes());
 };
-
