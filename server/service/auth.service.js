@@ -8,6 +8,7 @@ const compose = require('koa-compose');
 
 const User = mongoose.model('User');
 const Admin = mongoose.model('Admin');
+const Visitor = mongoose.model('Visitor');
 /**
  * 验证token
  */
@@ -25,7 +26,7 @@ function authToken() {
 /**
  * 验证用户是否登录
  */
-exports.isAuthenticated = (role = 'user') => {
+exports.isAuthenticated = (role) => {
   return compose([
     authToken(),
     async (ctx, next) => {
@@ -43,6 +44,9 @@ exports.isAuthenticated = (role = 'user') => {
       try {
         if (role === 'user') {
           user = await User.findById(ctx.state.user._id);
+        }
+        if (role === 'visitor') {
+          user = await Visitor.findById(ctx.state.user._id);
         }
         if (role === 'admin') {
           user = await Admin.findById(ctx.state.user._id);
