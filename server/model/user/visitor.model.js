@@ -2,7 +2,7 @@
  * @Author: wayne
  * @Date: 2018-05-04 23:07:53
  * @Last Modified by: kusty
- * @Last Modified time: 2018-05-13 21:59:10
+ * @Last Modified time: 2018-05-15 09:47:00
  */
 
 const mongoose = require('mongoose');
@@ -20,7 +20,7 @@ const VisitorSchema = new Schema({
     province: String,
     country: String,
   },
-});
+}, { versionKey: false });
 
 
 exports.VisitorSchema = VisitorSchema;

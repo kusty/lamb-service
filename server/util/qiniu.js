@@ -1,6 +1,11 @@
+/*
+ * @Author: kusty
+ * @Date: 2018-05-11 21:59:59
+ * @Last Modified by: kusty
+ * @Last Modified time: 2018-05-15 14:00:40
+ */
 
-
-const config = require('../config/env');
+const config = require('../config');
 const qiniu = require('qiniu');
 
 const mac = new qiniu.auth.digest.Mac(config.qiniu.app_key, config.qiniu.app_secret);
@@ -27,32 +32,34 @@ exports.bucket = bucket;
 const putExtra = new qiniu.form_up.PutExtra();
 exports.upload = (path, key) => {
   return new Promise(((resolve, reject) => {
-    formUploader.putFile(uptoken, key, path, putExtra, (err, respBody, respInfo) => {
+    formUploader.putFile(uptoken, key, path, putExtra, (err, res, data) => {
       if (err) {
         reject(err);
       }
-      if (respInfo.statusCode == 200) {
-        respBody.url = config.qiniu.domain + respBody.key;
-        resolve(respBody);
+      if (data.statusCode === 200) {
+        res.url = config.qiniu.domain + res.key;
+        resolve(res);
       } else {
-        reject(new Error(`error status${respInfo.statusCode}`));
+        reject(new Error(`error status${data.statusCode}`));
       }
     });
   }));
 };
 
 // 将网络图片上传到七牛服务器
-exports.fetch = (resUrl, key) => {
+exports.fetchAndUpload = (url, key) => {
   return new Promise(((resolve, reject) => {
-    bucketManager.fetch(resUrl, bucket, key, (err, respBody, respInfo) => {
+    bucketManager.fetch(url, bucket, key, (err, res, data) => {
+      console.log(res);
+      console.log(data);
       if (err) {
         reject(err);
       }
-      if (respInfo.statusCode == 200) {
-        respBody.url = config.qiniu.domain + respBody.key;
-        resolve(respBody);
+      if (data.statusCode === 200) {
+        res.url = config.qiniu.domain + res.key;
+        resolve(res);
       } else {
-        reject(new Error(`error status${respInfo.statusCode}`));
+        reject(new Error(`image upload error status${data.statusCode}`));
       }
     });
   }));
@@ -87,7 +94,7 @@ exports.copy = (srcKey, destKey, { force = false }) => {
         if (err) {
           reject(err);
         }
-        if (respInfo.statusCode == 200) {
+        if (respInfo.statusCode === 200) {
           resolve(respBody);
         } else {
           reject(new Error(`error status${respInfo.statusCode}`));
