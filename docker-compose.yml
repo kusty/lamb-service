@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  lamb-service:
+    image: lamb-service
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
