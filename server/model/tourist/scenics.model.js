@@ -1,8 +1,8 @@
 /*
  * @Author: wayne
  * @Date: 2018-04-14 13:30:34
- * @Last Modified by: wayne
- * @Last Modified time: 2018-05-03 10:16:50
+ * @Last Modified by: kusty
+ * @Last Modified time: 2018-05-15 19:33:27
  */
 
 
@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const PoiSchema = new Schema({
-  poi_id: {
+const ScenicsSchema = new Schema({
+  id: {
     type: Number,
   },
   name: {
@@ -23,26 +23,15 @@ const PoiSchema = new Schema({
   address: {
     type: String,
   },
-  country: {
-    type: String,
-  },
+
   country_id: {
     type: Number,
-  },
-  province: {
-    type: String,
   },
   province_id: {
     type: Number,
   },
-  city: {
-    type: String,
-  },
   city_id: {
     type: Number,
-  },
-  county: {
-    type: String,
   },
   county_id: {
     type: Number,
@@ -72,12 +61,12 @@ const PoiSchema = new Schema({
 }, { versionKey: false });
 
 
-PoiSchema
+ScenicsSchema
   .virtual('list')
   .get(() => {
     return {
       _id: this._id,
-      poi_id: this.poi_id,
+      id: this.id,
       name: this.name,
       tel: this.tel,
       head_img: this.head_img,
@@ -85,5 +74,5 @@ PoiSchema
     };
   });
 
-exports.PoiSchema = PoiSchema;
-module.exports = mongoose.model('Poi', PoiSchema);
+exports.ScenicsSchema = ScenicsSchema;
+module.exports = mongoose.model('Scenics', ScenicsSchema);

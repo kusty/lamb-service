@@ -1,8 +1,8 @@
 
 const router = require('koa-router')();
-const controller = require('./poi.controller');
+const controller = require('./scenics.controller');
 const auth = require('../../service/auth.service');
 
-router.get('/getList', controller.getList);
+router.get('/list', controller.getList);
 
 module.exports = router;

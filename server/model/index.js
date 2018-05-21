@@ -1,4 +1,4 @@
-require('./poi/poi.model');
+require('./tourist/scenics.model');
 require('./user/admin.model');
 require('./user/user.model');
 require('./user/visitor.model');
